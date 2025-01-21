@@ -1,0 +1,93 @@
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    01/20/25 11:53:37
+AddTwo.asm						     Page 1 - 1
+
+
+				.386
+				.model flat,stdcall
+				.stack 4096
+				ExitProcess proto, dwExitCode:dword
+
+ 00000000			.data
+ 00000000 00000000		Rval SDWORD ?
+ 00000004 0000001A		Xval SDWORD 26
+ 00000008 0000001E		Yval SDWORD 30
+ 0000000C 00000028		Zval SDWORD 40
+
+ 00000000			.code
+ 00000000			main PROC
+				    ; Set and reset Zero Flag (ZF)
+ 00000000  B0 01		    mov al, 1
+ 00000002  04 FF		    add al, -1      ; ZF = 1
+ 00000004  04 01		    add al, 1       ; ZF = 0
+
+				    ; Set and reset Sign Flag (SF)
+ 00000006  B0 00		    mov al, 0
+ 00000008  04 FF		    add al, -1      ; SF = 1
+ 0000000A  04 01		    add al, 1       ; SF = 0
+
+				    ; Set and reset Carry Flag (CF)
+ 0000000C  B0 7F		    mov al, +127
+ 0000000E  04 01		    add al, 1   
+ 00000010  04 01		    add al, 1 
+
+				    ; Set and reset Overflow Flag (OF)
+ 00000012  B0 7F		    mov al, +127
+ 00000014  04 01		    add al, 1       ; OF = 1
+ 00000016  04 01		    add al, 1      ; OF = 0
+				        ; Set and reset Overflow Flag (OF)
+ 00000018  B0 02		    mov al, 2
+ 0000001A  04 02		    add al, 2      
+ 0000001C  04 01		    add al, 1      
+
+				  
+
+
+				    INVOKE ExitProcess, 0
+ 0000001E  6A 00	   *	    push   +000000000h
+ 00000020  E8 00000000 E   *	    call   ExitProcess
+ 00000025			main ENDP
+				END main
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    01/20/25 11:53:37
+AddTwo.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000010 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000025 DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000025 Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000003h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+Rval . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+Xval . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+Yval . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+Zval . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
+
+	   0 Warnings
+	   0 Errors

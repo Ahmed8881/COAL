@@ -1,0 +1,8 @@
+﻿  Assembling test.asm...
+test.asm(2): error A2008: syntax error : .
+test.asm(3): error A2008: syntax error : .
+test.asm(4): error A2008: syntax error : .
+test.asm(5): error A2008: syntax error : ,
+test.asm(13): error A2008: syntax error : invoke
+test.asm(14): error A2088: END directive required at end of file
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: The command "ml64.exe /c /nologo /Zi /Fo"Lab1\x64\Debug\test.obj" /W3 /errorReport:prompt  /Tatest.asm" exited with code 1.

@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\UET\\COAL LAB\\Lab1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5E332BEC-BF16-42FD-811A-221EE61842BD}|Lab1.vcxproj|E:\\UET\\COAL LAB\\Lab1\\test.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5E332BEC-BF16-42FD-811A-221EE61842BD}|Lab1.vcxproj|solutionrelative:test.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "test.asm",
+              "DocumentMoniker": "E:\\UET\\COAL LAB\\Lab1\\test.asm",
+              "RelativeDocumentMoniker": "test.asm",
+              "ToolTip": "E:\\UET\\COAL LAB\\Lab1\\test.asm",
+              "RelativeToolTip": "test.asm",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-13T09:21:26.53Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

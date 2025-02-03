@@ -1,0 +1,4 @@
+Ways to watch variables:
+1-Run the project go to debug click on memory select 1 column and then no text
+2-Run the project go to debug click on listing file
+3-Run the project go to debug click on watch window to watch the variable during debugging

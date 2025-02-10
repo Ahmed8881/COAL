@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\UET\\COAL LAB\\COAL\\Lab5\\Project32_VS2022\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4164AA65-1EF9-4E69-899B-D1BED776070B}|Project.vcxproj|D:\\UET\\COAL LAB\\COAL\\Lab5\\Project32_VS2022\\AddTwo.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4164AA65-1EF9-4E69-899B-D1BED776070B}|Project.vcxproj|solutionrelative:AddTwo.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddTwo.asm",
+              "DocumentMoniker": "D:\\UET\\COAL LAB\\COAL\\Lab5\\Project32_VS2022\\AddTwo.asm",
+              "RelativeDocumentMoniker": "AddTwo.asm",
+              "ToolTip": "D:\\UET\\COAL LAB\\COAL\\Lab5\\Project32_VS2022\\AddTwo.asm",
+              "RelativeToolTip": "AddTwo.asm",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAAAGEAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-13T09:32:05.608Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,0 @@
-﻿  Assembling AddTwo.asm...
-c:\Irvine\SmallWin.inc(11): warning A4011: multiple .MODEL directives found : .MODEL ignored
-  Project.vcxproj -> D:\UET\COAL LAB\COAL\Lab5\Project32_VS2022\Debug\Project.exe

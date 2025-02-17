@@ -1,43 +1,87 @@
-.386
-.model flat,stdcall
-.stack 4096
-ExitProcess proto, dwExitCode:dword
+INCLUDE Irvine32.inc 
 
 .data
-Rval SDWORD ?
-Xval SDWORD 26
-Yval SDWORD 30
-Zval SDWORD 40
+    myArray1 BYTE 1,2,3,4,5  
+    arrSize  = ($ - myArray1)
+    sum DWORD ?              
+    var1 DWORD ?             
+    randomNum DWORD ?        
+
+    ; Messages
+    prompt  BYTE "Enter the number of times: ", 0
+    randMsg BYTE "Random Number: ", 0
+    sumMsg  BYTE "Sum of reversed array: ", 0
 
 .code
 main PROC
-    ; Set and reset Zero Flag (ZF)
-    mov al, 1
-    add al, -1      ; ZF = 1
-    add al, 1       ; ZF = 0
+    call Randomize  
 
-    ; Set and reset Sign Flag (SF)
-    mov al, 0
-    add al, -1      ; SF = 1
-    add al, 1       ; SF = 0
+    mov edx, OFFSET prompt
+    call WriteString
+    call ReadInt
+    mov var1, eax  
 
-    ; Set and reset Carry Flag (CF)
-    mov al, +127
-    add al, 1   
-    add al, 1 
+L1:
+    call intSum
 
-    ; Set and reset Overflow Flag (OF)
-    mov al, +127
-    add al, 1       ; OF = 1
-    add al, 1      ; OF = 0
-        ; Set and reset Overflow Flag (OF)
-    mov al, 2
-    add al, 2      
-    add al, 1      
+    mov eax, 10          
+    call RandomRange
+    mov randomNum, eax
 
-  
+    mov edx, OFFSET randMsg
+    call WriteString
+    mov eax, randomNum
+    call WriteDec
+    call Crlf
 
+    dec var1
+    cmp var1, 0
+    jne L1
 
-    INVOKE ExitProcess, 0
+    call ExitProcess
 main ENDP
+
+intSum PROC
+    pushad 
+
+    mov ecx, arrSize
+    mov esi, 0
+L2:
+    movzx eax, myArray1[esi]  
+    push eax                 
+    inc esi
+    loop L2
+
+    ; Pop from stack to reverse the array and sum it
+    mov ecx, arrSize
+    mov esi, 0
+    xor eax, eax              
+L3:
+    pop ebx                   
+    mov myArray1[esi], bl      
+    add eax, ebx              
+    inc esi
+    loop L3
+
+    mov sum, eax              
+
+    mov edx, OFFSET sumMsg
+    call WriteString
+
+    mov eax, sum
+    call WriteHex             
+    call Crlf
+
+    mov eax, sum
+    call WriteBin             
+    call Crlf
+
+    mov eax, sum
+    call WriteDec             
+    call Crlf
+
+    popad  
+    ret
+intSum ENDP
+
 END main

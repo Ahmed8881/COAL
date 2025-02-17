@@ -1,8 +1,8 @@
-Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/17/25 11:56:50
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/17/25 12:01:21
 AddTwo.asm						     Page 1 - 1
 
 
-				INCLUDE Irvine32.inc 
+				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
 			      C 
 			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
@@ -22,105 +22,52 @@ AddTwo.asm						     Page 1 - 1
 			      C 
 
  00000000			.data
- 00000000 01 02 03 04 05	    myArray1 BYTE 1,2,3,4,5  
- 00000005 = 00000005		    arrSize  = ($ - myArray1)
- 00000005 00000000		    sum DWORD ?              
- 00000009 00000000		    var1 DWORD ?             
- 0000000D 00000000		    randomNum DWORD ?        
-
-				    ; Messages
- 00000011 45 6E 74 65 72	    prompt  BYTE "Enter the number of times: ", 0
-	   20 74 68 65 20
-	   6E 75 6D 62 65
-	   72 20 6F 66 20
-	   74 69 6D 65 73
-	   3A 20 00
- 0000002D 52 61 6E 64 6F	    randMsg BYTE "Random Number: ", 0
-	   6D 20 4E 75 6D
-	   62 65 72 3A 20
+ 00000000 53 75 6D 3A 20	    msg1 BYTE "Sum: ", 0
 	   00
- 0000003D 53 75 6D 20 6F	    sumMsg  BYTE "Sum of reversed array: ", 0
-	   66 20 72 65 76
-	   65 72 73 65 64
-	   20 61 72 72 61
-	   79 3A 20 00
+ 00000006 45 64 69 74 65	    msg2 BYTE "Edited Sum: ", 0
+	   64 20 53 75 6D
+	   3A 20 00
 
  00000000			.code
  00000000			main PROC
- 00000000  E8 00000000 E	    call Randomize  
+ 00000000  B9 0000000F		    mov ECX, 15      
+ 00000005  BA 00000015		    mov EDX, 21      
 
- 00000005  BA 00000011 R	    mov edx, OFFSET prompt
- 0000000A  E8 00000000 E	    call WriteString
- 0000000F  E8 00000000 E	    call ReadInt
- 00000014  A3 00000009 R	    mov var1, eax  
+ 0000000A  E8 00000040		    call AddTwoNumbers
 
- 00000019			L1:
- 00000019  E8 0000003C		    call intSum
+ 0000000F  50			    push EAX
 
- 0000001E  B8 0000000A		    mov eax, 10          
- 00000023  E8 00000000 E	    call RandomRange
- 00000028  A3 0000000D R	    mov randomNum, eax
+ 00000010  58			    pop EAX
+ 00000011  8B D8		    mov EBX, EAX    
 
- 0000002D  BA 0000002D R	    mov edx, OFFSET randMsg
- 00000032  E8 00000000 E	    call WriteString
- 00000037  A1 0000000D R	    mov eax, randomNum
- 0000003C  E8 00000000 E	    call WriteDec
- 00000041  E8 00000000 E	    call Crlf
+ 00000013  BA 00000000 R	    mov edx, OFFSET msg1
+ 00000018  E8 00000000 E	    call WriteString
+ 0000001D  E8 00000000 E	    call WriteInt
+ 00000022  E8 00000000 E	    call Crlf
 
- 00000046  FF 0D 00000009 R	    dec var1
- 0000004C  83 3D 00000009 R	    cmp var1, 0
-	   00
- 00000053  75 C4		    jne L1
+ 00000027  83 EC 04		    sub ESP, 4       
+ 0000002A  89 1C 24		    mov [ESP], EBX   
+ 0000002D  83 04 24 05		    add DWORD PTR [ESP], 5 
 
- 00000055  E8 00000000 E	    call ExitProcess
- 0000005A			main ENDP
+ 00000031  BA 00000006 R	    mov edx, OFFSET msg2
+ 00000036  E8 00000000 E	    call WriteString
+ 0000003B  8B 04 24		    mov EAX, [ESP]   
+ 0000003E  E8 00000000 E	    call WriteInt
+ 00000043  E8 00000000 E	    call Crlf
 
- 0000005A			intSum PROC
- 0000005A  60			    pushad 
+				    invoke ExitProcess, 0
+ 00000048  6A 00	   *	    push   +000000000h
+ 0000004A  E8 00000000 E   *	    call   ExitProcess
+ 0000004F			main ENDP
 
- 0000005B  B9 00000005		    mov ecx, arrSize
- 00000060  BE 00000000		    mov esi, 0
- 00000065			L2:
- 00000065  0F B6 86		    movzx eax, myArray1[esi]  
-	   00000000 R
- 0000006C  50			    push eax                 
- 0000006D  46			    inc esi
- 0000006E  E2 F5		    loop L2
-
-				    ; Pop from stack to reverse the array and sum it
- 00000070  B9 00000005		    mov ecx, arrSize
- 00000075  BE 00000000		    mov esi, 0
- 0000007A  33 C0		    xor eax, eax              
- 0000007C			L3:
- 0000007C  5B			    pop ebx                   
- 0000007D  88 9E 00000000 R	    mov myArray1[esi], bl      
- 00000083  03 C3		    add eax, ebx              
- 00000085  46			    inc esi
- 00000086  E2 F4		    loop L3
-
- 00000088  A3 00000005 R	    mov sum, eax              
-
- 0000008D  BA 0000003D R	    mov edx, OFFSET sumMsg
- 00000092  E8 00000000 E	    call WriteString
-
- 00000097  A1 00000005 R	    mov eax, sum
- 0000009C  E8 00000000 E	    call WriteHex             
- 000000A1  E8 00000000 E	    call Crlf
-
- 000000A6  A1 00000005 R	    mov eax, sum
- 000000AB  E8 00000000 E	    call WriteBin             
- 000000B0  E8 00000000 E	    call Crlf
-
- 000000B5  A1 00000005 R	    mov eax, sum
- 000000BA  E8 00000000 E	    call WriteDec             
- 000000BF  E8 00000000 E	    call Crlf
-
- 000000C4  61			    popad  
- 000000C5  C3			    ret
- 000000C6			intSum ENDP
+ 0000004F			AddTwoNumbers PROC
+ 0000004F  8B C1		    mov EAX, ECX     
+ 00000051  03 C2		    add EAX, EDX     
+ 00000053  C3			    ret
+ 00000054			AddTwoNumbers ENDP
 
 				END main
-Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/17/25 11:56:50
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/17/25 12:01:21
 AddTwo.asm						     Symbols 2 - 1
 
 
@@ -214,14 +161,15 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000055 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000000C6 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000013 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000054 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
 
                 N a m e                 Type     Value    Attr
 
+AddTwoNumbers  . . . . . . . . .	P Near	 0000004F _TEXT	Length= 00000005 Public STDCALL
 CloseFile  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 CloseHandle  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 Clrscr . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
@@ -322,11 +270,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-intSum . . . . . . . . . . . . .	P Near	 0000005A _TEXT	Length= 0000006C Public STDCALL
-  L2 . . . . . . . . . . . . . .	L Near	 00000065 _TEXT	
-  L3 . . . . . . . . . . . . . .	L Near	 0000007C _TEXT	
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000005A Public STDCALL
-  L1 . . . . . . . . . . . . . .	L Near	 00000019 _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004F Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -545,7 +489,6 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-arrSize  . . . . . . . . . . . .	Number	 00000005h   
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
@@ -560,14 +503,9 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-myArray1 . . . . . . . . . . . .	Byte	 00000000 _DATA	
-prompt . . . . . . . . . . . . .	Byte	 00000011 _DATA	
-randMsg  . . . . . . . . . . . .	Byte	 0000002D _DATA	
-randomNum  . . . . . . . . . . .	DWord	 0000000D _DATA	
+msg1 . . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+msg2 . . . . . . . . . . . . . .	Byte	 00000006 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-sumMsg . . . . . . . . . . . . .	Byte	 0000003D _DATA	
-sum  . . . . . . . . . . . . . .	DWord	 00000005 _DATA	
-var1 . . . . . . . . . . . . . .	DWord	 00000009 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

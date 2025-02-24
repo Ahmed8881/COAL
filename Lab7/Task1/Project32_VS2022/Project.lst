@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/24/25 10:57:45
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/24/25 11:21:56
 AddTwo.asm						     Page 1 - 1
 
 
@@ -50,7 +50,6 @@ c:\Irvine\SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .M
 
  00000000			.code
  00000000			main proc
-				    ; Initialize variables
  00000000  BE 00000000 R	    mov esi, offset dataArray
  00000005  C7 05 00000014 R	    mov arraySum, 0
 	   00000000
@@ -72,7 +71,6 @@ c:\Irvine\SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .M
  00000032  83 C6 04		    add esi, 4
  00000035  E2 F3		    loop sum_loop
 
-				    ; Get another integer from the user and store in EAX
  00000037  E8 00000000 E	    call ReadInt
 
 				    ; Compare arraySum with EAX
@@ -84,17 +82,14 @@ c:\Irvine\SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .M
  0000004A  EB 20		    jmp end_program
 
  0000004C			greater:
-				    ; Display message1
  0000004C  BA 00000018 R	    mov edx, offset message1
  00000051  E8 00000000 E	    call MsgBox
  00000056  EB 14		    jmp end_program
 
  00000058			less:
-				    ; Display message2
  00000058  BA 00000030 R	    mov edx, offset message2
  0000005D  E8 00000000 E	    call MsgBox
  00000062			equal:
-					; Display message3
  00000062  BA 00000045 R		mov edx, offset message3
  00000067  E8 00000000 E		call MsgBox
 				 
@@ -105,7 +100,7 @@ c:\Irvine\SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .M
  0000006E  E8 00000000 E   *	    call   ExitProcess
  00000073			main endp
 				end main
-Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/24/25 10:57:45
+Microsoft (R) Macro Assembler Version 14.40.33813.0	    02/24/25 11:21:56
 AddTwo.asm						     Symbols 2 - 1
 
 

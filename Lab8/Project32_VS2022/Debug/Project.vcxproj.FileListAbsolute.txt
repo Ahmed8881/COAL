@@ -1,2 +1,3 @@
 E:\UET\COAL LAB\LAB_1\Project32_VS2022\Debug\Project.exe
-D:\UET\COAL LAB\Lab2\Project32_VS2022\Debug\Project.exe
+D:\UET\COAL LAB\COAL\Lab3\Project32_VS2022\Debug\Project.exe
+D:\UET\COAL LAB\COAL\Lab8\Project32_VS2022\Debug\Project.exe

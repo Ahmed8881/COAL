@@ -1,43 +1,27 @@
 .386
-.model flat,stdcall
+.model flat, stdcall
 .stack 4096
-ExitProcess proto, dwExitCode:dword
+ExitProcess PROTO, dwExitCode:DWORD
+INCLUDE Irvine32.inc
 
 .data
-Rval SDWORD ?
-Xval SDWORD 26
-Yval SDWORD 30
-Zval SDWORD 40
+testVal SWORD -170    
 
 .code
 main PROC
-    ; Set and reset Zero Flag (ZF)
-    mov al, 1
-    add al, -1      ; ZF = 1
-    add al, 1       ; ZF = 0
-
-    ; Set and reset Sign Flag (SF)
-    mov al, 0
-    add al, -1      ; SF = 1
-    add al, 1       ; SF = 0
-
-    ; Set and reset Carry Flag (CF)
-    mov al, +127
-    add al, 1   
-    add al, 1 
-
-    ; Set and reset Overflow Flag (OF)
-    mov al, +127
-    add al, 1       ; OF = 1
-    add al, 1      ; OF = 0
-        ; Set and reset Overflow Flag (OF)
-    mov al, 2
-    add al, 2      
-    add al, 1      
-
+    
+    and eax, 0      
+    mov ax, testVal    
+    
   
+    shl eax, 16        
+    sar eax, 16        
+    
 
 
+    call WriteInt      
+    call Crlf
+    
     INVOKE ExitProcess, 0
 main ENDP
 END main
